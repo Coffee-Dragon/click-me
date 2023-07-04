@@ -1,21 +1,29 @@
 const checkbox = document.querySelector("#checkbox");
-// console.log(checkbox);
 checkbox.addEventListener("change", ()=>{
     alert("CAUGTH ME");
 })
+
+const kvadratik = checkbox.getBoundingClientRect();
+let x1 = kvadratik.x;
+let y1 = kvadratik.y;
+const width = kvadratik.width;
+const height = kvadratik.height;
+
 document.addEventListener("mousemove", function (event){
-    // console.log(event.x, event.y);
-    const kvadratik = checkbox.getBoundingClientRect();
-    const x1 = kvadratik.x;
-    const y1 = kvadratik.y;
-    const x2 = kvadratik.right;
-    const y2 = kvadratik.bottom;
-
+    const x2 = x1 + width;
+    const y2 = y1 + height;
+    
     if (event.x >= x1 && event.x <= x2 && event.y >= y1 && event.y <= y2) {
+        x1 += 10*event.movementX;
+        y1 += 10*event.movementY;
 
-        console.log("POPAL");
+        if (y1 < 0) {
+            y1 = clientHeight/2 - height/2;
+        }
+
+        checkbox.style.top = `${y1}px`;
+        checkbox.style.left = `${x1}px`;
     }
-
 })
 
 let clientHeight = document.documentElement.clientHeight;
@@ -24,8 +32,4 @@ let clientWidth = document.documentElement.clientWidth;
 window.addEventListener("resize", ()=>{
     clientHeight = document.documentElement.clientHeight;
     clientWidth = document.documentElement.clientWidth;
-    // console.log(clientHeight, clientWidth);
 })
-
-
-
