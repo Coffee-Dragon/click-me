@@ -17,14 +17,15 @@ document.addEventListener("mousemove", function (event){
         x1 += 10*event.movementX;
         y1 += 10*event.movementY;
 
-        if (y1 < 0) {
+        if (y1 < 0 || x1 < 0 || y2 > clientHeight || x2 > clientWidth ) {
             y1 = clientHeight/2 - height/2;
+            x1 = clientWidth/2 - width/2;
         }
 
         checkbox.style.top = `${y1}px`;
         checkbox.style.left = `${x1}px`;
     }
-})
+});
 
 let clientHeight = document.documentElement.clientHeight;
 let clientWidth = document.documentElement.clientWidth;
